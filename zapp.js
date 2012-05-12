@@ -98,7 +98,7 @@ Zapp.Router = Zapp(Zapp.Events, function() {
   if (getHash() == ""){
     setTimeout(function(){
       self.trigger("/");
-      self.trigger("change");
+      //self.trigger("change", {hash:"/"});
     }, 2);
     
   }else{
