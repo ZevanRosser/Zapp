@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="../zapp.js"></script>
+    <script>
+      window.onload = function(){
+        
+        var CustomObject = Zapp.Object(function(){
+          console.log("I am a new custom object");
+          this.instanceVar = ["hello", "there"];
+        }, {
+          property : "I am a property on CustomObject's prototype",
+          method : function(){
+            console.log("I am a method on CustomObject's prototype");
+          } 
+        });
+        
+        var co = new CustomObject();
+        console.log(co.instanceVar, co.property);
+        co.method();
+        
+        // the above is the same as:
+        var CustomObject = function(){
+          console.log("I am a new custom object");
+          this.instanceVar = ["hello", "there"];
+        };
+        CustomObject.prototype.property = "I am a property on CustomObject's prototype"; 
+        CustomObject.prototype.method  = function(){
+          console.log("I am a method on CustomObject's prototype");
+        }; 
+        
+      }
+    </script>
+    <style>
+    </style>
+  </head>
+  <body>
+  
+  </body>
+</html>
