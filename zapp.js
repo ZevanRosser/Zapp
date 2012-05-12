@@ -108,7 +108,10 @@ Zapp.Router = Zapp(Zapp.Events, function() {
   function checkHash() {
     var hash = getHash();
     if (prevHash != hash) {
-      
+      if (hash == ""){
+        self.trigger("/");
+        return;
+      }
       self.trigger("change", {hash:hash});
       for (var i = 0; i < self._listeners.length; i++) {
         var type = self._listeners[i].type;
