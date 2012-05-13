@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="../zapp.js"></script>
+    <script>
+     $(function(){
+
+       var HexInput = Zapp.Object(Zapp.Events, function(){
+         this.color = $("#color");
+         this.isHex = /^#([A-Fa-f0-9]{6})$/;
+         $(document).keyup($.proxy(this.change, this));
+       }, {
+         change : function(){
+           var value = this.color.val();
+           if (value.match(this.isHex)){
+             this.trigger("colorChange", value);
+             this.color.css("color", "black"); 
+           }else{
+             this.color.css("color", "red"); 
+           }
+         }
+       });
+       
+       var rgb = $("#rgb");
+       var swatch = $("#swatch");
+       var hex = $("#hex");
+       var hexInput = new HexInput();
+       
+       hexInput.on("colorChange", displayRGB)
+               .on("colorChange", displaySwatch)
+               .on("colorChange", displayHex);
+       
+       function displayRGB(color){
+         color = parseInt(color.substr(1), 16);
+         var r = color >> 16 & 0xff;
+         var g = color >> 8 & 0xff;
+         var b = color & 0xff; 
+         rgb.text("rgb("+r+","+g+","+b+")");
+       }
+       
+       function displaySwatch(color){
+         swatch.css("background-color", color);
+       }
+       
+       function displayHex(color){
+         hex.text(color);
+       }
+
+     });
+    </script>
+    <style>
+      body,html{
+        font-family : sans-serif;
+        font-size : 13px; 
+      }
+      .view{
+        padding : 5px;
+        margin :5px;
+        border : 1px solid #ccc; 
+      }
+      #swatch{
+        width : 50px;
+        height : 50px; 
+      }
+    </style>
+  </head>
+  <body>
+    Enter a 6 digit hexidecimal color:<br/>
+    <input id="color" type="text" autocomplete="off" placeholder="#RRGGBB"/>
+    
+    <div id="rgb" class="view">rgb</div>
+    <div id="swatch" class="view">swatch</div>
+    <div id="hex" class="view">hex</div>
+    
+  </body>
+</html>
