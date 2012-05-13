@@ -158,18 +158,15 @@ Zapp.Router = Zapp(Zapp.Events, function() {
 
 }, {
   is: function() {
-    var self = this;
-    self.on.apply(self, arguments);
-    return self;
+    this.on.apply(this, arguments);
+    return this;
   },
   clear: function() {
-    var self = this;
-    self.off.apply(self, arguments);
-    return self;
+    this.off.apply(this, arguments);
+    return this;
   },
   clearAll: function() {
-    var self = this;
-    self.allOff.apply(self, arguments);
-    return self;
+    this.allOff.apply(this, arguments);
+    return this;
   }
 });
