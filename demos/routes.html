@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="../zapp.js"></script>
+    <script>
+     $(function(){
+
+       var router = new Zapp.Router();
+       var content = $("#content");
+       
+       router.is("/", function(){
+         window.location.href = "#one"
+       }).is("one", function(){
+         content.text("one");
+       }).is("two", function(){
+         content.text("two");
+       }).is("three,content", function(data){
+         content.text(data.content);
+       });
+
+     });
+    </script>
+    <style>
+      body,html{
+        margin : 0px;
+        padding : 0px; 
+      }
+      #left{
+        float : left; 
+        padding : 5px;
+        width : 100px;
+        border-right : 1px solid #ccc;
+      }
+      #content {
+        padding : 5px;
+        float : left; 
+      }
+    </style>
+  </head>
+  <body>
+    <div id="left">
+      <a href="#one">one</a>
+      <a href="#two">two</a>
+      <a href="#three,this is section 3">three</a>
+    </div>
+    <div id="content">
+    </div>
+  </body>
+</html>
