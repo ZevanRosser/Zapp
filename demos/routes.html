@@ -19,6 +19,8 @@
          content.text("two");
        }).is("three,content", function(data){
          content.text(data.content);
+       }).on("change", function(data){
+         console.log("the hash is: " + data.hash);
        });
 
      });
